@@ -10,7 +10,11 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'cd main && ./hello_exec'
+                // Original command commented
+                // sh 'cd main && ./hello_exec'
+
+                // Intentional error
+                sh 'cd main && ./error_exec'
                 echo 'Test stage completed'
             }
         }
