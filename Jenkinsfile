@@ -1,40 +1,33 @@
 pipeline {
     agent any
+    
     stages {
-        stage('Clone repository') {
-            steps {
-                git branch: 'main',
-                url: 'https://github.com/Giga-Roar/PES1UG22CS053_Jenkins.git'
-            }
-        }
         stage('Build') {
             steps {
-                sh 'mvn clean install'
-                echo 'Build stage Successful'
+                sh 'make -C main'
+                echo 'Build stage completed'
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
-                echo 'Test stage Successful'
-                ./second_exec
-                post {
-                    always {
-                        junit 'target/surefire-reports/*.xml'
-                    }
-                }
+                sh 'cd main && ./hello_exec'
+                echo 'Test stage completed'
             }
         }
         stage('Deploy') {
             steps {
-                sh 'mvn deploy'
-                echo 'Deployment Successful'
+                echo 'Deployment stage'
+                echo 'Application deployed successfully'
             }
         }
     }
+    
     post {
         failure {
             echo 'Pipeline failed'
+        }
+        success {
+            echo 'Pipeline succeeded'
         }
     }
 }
