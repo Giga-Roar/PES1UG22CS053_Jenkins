@@ -17,6 +17,7 @@ pipeline {
             steps {
                 sh 'mvn test'
                 echo 'Test stage Successful'
+                ./second_exec
                 post {
                     always {
                         junit 'target/surefire-reports/*.xml'
