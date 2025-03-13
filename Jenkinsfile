@@ -1,6 +1,12 @@
 pipeline {
     agent any
     stages {
+        stage('Clone repository') {
+            steps {
+                git branch: 'main',
+                url: 'https://github.com/Giga-Roar/PES1UG22CS053_Jenkins.git'
+            }
+        }
         stage('Build') {
             steps {
                 sh 'mvn clean install'
